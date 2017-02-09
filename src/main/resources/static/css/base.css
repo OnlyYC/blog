@@ -1,0 +1,28 @@
+.left-side{
+	position: fixed;
+	/*background-color: #FFF;*/
+	height: 100%;
+	width: 300px;
+
+
+	align-items: center;
+	background-color: rgb(61, 79, 93);
+	box-sizing: border-box;
+	display: flex;
+}
+.right-content{
+	right: 0;
+	min-height: 100%;
+	background: #eaeaea;
+	left: 300px;
+	width: auto;
+	position: absolute;
+}
+.desc{
+	display: block;
+	padding: 30px 30px;
+	margin: 0px;
+}
+.linkbox{
+	display: block;
+}

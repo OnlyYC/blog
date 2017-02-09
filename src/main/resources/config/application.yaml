@@ -5,7 +5,6 @@ server:
 
 #datasource
 spring:
-
   thymeleaf:
     cache: false
 
@@ -25,7 +24,7 @@ spring:
     url: jdbc:h2:file:~/h2/blog;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1
   h2:
     console:
-      enabled: :true
+      enabled: true
 
 
 
