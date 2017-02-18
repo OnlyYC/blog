@@ -3,66 +3,68 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
-    <title>Liaoyb Blog</title>
+    <title>LiaoYb Blog</title>
     <link type="text/css" th:href="@{js/lib/bootstrap-3.3.7/css/bootstrap.min.css}" href="../static/js/lib/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet"/>
+    <link type="text/css" th:href="@{js/lib/font-awesome-4.7.0/css/font-awesome.min.css}" href="../static/js/lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet"/>
     <link type="text/css" th:href="@{css/base.css}" href="../static/css/base.css" rel="stylesheet"/>
 </head>
 <body>
 
-	<div class="left-side">
-		<h2 class="desc">
-			<a th:href="@{/}" href="index.html">Liaoyb Blog</a>
-		</h2>
-		<div class="linkbox">
-			<div>
-				<a href="#">
-					<div>About</div>
-				</a>
-				<a href="#">
-					<div>GitHub</div>
-				</a>
-			</div>
-			<div>
-				<a href="#">
-					<div>Twitter</div>
-				</a>
-				<a href="#">
-					<div>WeiBo</div>
-				</a>
+	<div class="WideStyles-header NarrowStyles-header Styles-header">
+		<div class=" NarrowStyles-headerContent WideStyles-headerContent">
+			<h2 style="padding: 30px 30px;margin: 0px;">
+				<a class=" Styles-subtleLink NarrowStyles-flexFont" style="color: white;" th:href="@{/}" href="index.html">LiaoYb Blog</a>
+			</h2>
+			<div class=" Styles-headerLinkBox NarrowStyles-linkFlex" >
+				<div style="display: flex;flex-direction: row;">
+					<div class=" Styles-headerLink">
+						<a href="about.html" th:href="@{/about}" class=" Styles-subtleLink" style="color: white;">
+							<div>
+								<div><i class="fa fa-question-circle"></i></div>
+								About
+							</div>
+						</a>
+					</div>
+					<div class=" Styles-headerLink">
+						<a href="https://onlyyc.github.io/Resume/" class=" Styles-subtleLink" style="color: white;">
+							<div>
+								<div><i class="fa fa-file-text"></i></div>
+								Resume
+							</div>
+						</a>
+					</div>
+					<div class=" Styles-headerLink">
+						<a href="https://github.com/OnlyYC" class="Styles-subtleLink" style="color: white;">
+							<div>
+								<div><i class="fa fa-github"></i></div>
+								Github
+							</div>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="right-content">
-		<article class="show">
-			<div>
-				<h2>
-					<a rel="bookmark" href="http://localhost:8080/articles/2017/02/07/1486470128548.html">
-						一篇文章
-					</a>
-					<sup>
-						置顶！
-					</sup>
-					<sup>
-						有更新！
-					</sup>
-				</h2>
 
-				<time><span class="icon-date"></span> 2017-02-07</time>
+	<div class="WideStyles-content NarrowStyles-content" style="max-width: 1000px;">
+		<div>
+			<h1>
+				<a href="" class="Styles-subtleLink" style="color: rgb(34, 34, 34);">What's Functional Programming All About?</a>
+			</h1>
+			<div style="color: #999;margin-bottom: 20px;">
+				Posted
+				<a href="">2017-01-25</a>
 			</div>
-			<section class="abstract">
 
-			</section>
-			<footer class="tags">
-				<span class="icon-tag"></span>  &nbsp;
-				<a class="tag color3" rel="tag" href="http://localhost:8080/tags/Solo">
-					Solo</a>
+			<p>There are many descriptions floating around the internet, trying to explain functional programming in simple terms. Unfortunately, most discuss details only loosely related to functional programming, while others focus on topics that are completely irrelevant. So of course, I had to write my own!</p>
+			<p>This post is my own understanding of what is the "core" of "functional programming", how it differs from "imperative" programming, and what the main benefits of the approach are. As a worked example, we will use a kitchen recipe as a proxy for the more-abstract kind of logic you find in program source code, to try and make concrete what is normally a very abstract topic. That recipe is one of my favorite recipes available online</p>
 
-				<a rel="nofollow" href="http://localhost:8080/authors/1486387884117">
-					<img class="avatar" title="root" alt="root" src="https://secure.gravatar.com/avatar/744010b86a84584d37b80d4f62e459d9?s=128"/>
-				</a>
-			</footer>
-		</article>
+			<a href="javascript:void(0);" >Comments</a>
+
+			<hr class="divide"/>
+		</div>
 	</div>
+	<div class=" WideStyles-footer Styles-footer">Last published 2017-02-18</div>
 
     <script type="text/javascript" th:src="@{js/lib/jquery-1.12.4/jquery.min.js}" src="../static/js/lib/jquery-1.12.4/jquery.js" charset="utf-8"></script>
     <script type="text/javascript" th:src="@{js/lib/bootstrap-3.3.7/js/bootstrap.min.js}" src="../static/js/lib/bootstrap-3.3.7/js/bootstrap.js" charset="utf-8"></script>

@@ -1,6 +1,3 @@
-/**
- * Copyright 2017 Iflytek, Inc. All rights reserved.
- */
 package com.liaoyb.blog.model;
 
 import java.io.Serializable;
@@ -27,13 +24,17 @@ public class Article implements Serializable {
 	@GeneratedValue
 	private String id;
 
-	@Column
 	private String title;
 
-	@Column
+	private String describe;
+
+	//文章地址(markdown转换成的html)
+	private String link;
 	private String content;
 
+	@Column(name = "create_time")
 	private Date createTime;
+	@Column(name = "update_time")
 	private Date updateTime;
 
 	public String getId() {
@@ -74,5 +75,25 @@ public class Article implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public String getDescribe() {
+		return describe;
+	}
+
+	public void setDescribe(String describe) {
+		this.describe = describe;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 }

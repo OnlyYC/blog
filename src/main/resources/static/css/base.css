@@ -1,28 +1,86 @@
-.left-side{
-	position: fixed;
-	/*background-color: #FFF;*/
-	height: 100%;
-	width: 300px;
+@media (min-width: 60em) {
+	.WideStyles-header{
+		bottom: 0px;
+		justify-content: center;
+		position: fixed;
+		top: 0px;
+		width: 25%;
+	}
+
+	.WideStyles-headerContent{
+		text-align: center;
+	}
+
+	.WideStyles-content{
+		box-sizing: border-box;
+		margin-left: 25%;
+		padding: 48px;
+	}
+
+	.WideStyles-footer{
+		bottom: 0px;
+		height: 50px;
+		position: fixed;
+		width: 25%;
+	}
+}
+
+@media (max-width: 60em) {
+	.NarrowStyles-header{
+		margin-bottom: 10px;
+	}
+
+	.NarrowStyles-content{
+		padding: 16px;
+	}
+
+	.NarrowStyles-headerContent{
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+
+	.NarrowStyles-linkFlex{
+		align-self: flex-end;
+	}
+
+	.NarrowStyles-flexFont{
+		font-size: 4vw;
+	}
+}
 
 
+.Styles-header{
 	align-items: center;
 	background-color: rgb(61, 79, 93);
 	box-sizing: border-box;
 	display: flex;
 }
-.right-content{
-	right: 0;
-	min-height: 100%;
-	background: #eaeaea;
-	left: 300px;
-	width: auto;
-	position: absolute;
+
+.Styles-headerLinkBox{
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	text-align: center;
 }
-.desc{
-	display: block;
-	padding: 30px 30px;
-	margin: 0px;
+
+.Styles-headerLink{
+	align-items: center;
+	display: flex;
+	flex: 1;
+	justify-content: center;
+	padding: 10px 10px;
 }
-.linkbox{
-	display: block;
+
+.Styles-footer{
+	color: rgb(158, 167, 174);
+	display: flex;
+	justify-content: center;
+}
+
+.Styles-subtleLink{
+	text-decoration: none;
+}
+.divide {
+	margin: 50px 0px 50px 0px;
 }

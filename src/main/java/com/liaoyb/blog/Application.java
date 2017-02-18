@@ -1,6 +1,3 @@
-/**
- * Copyright 2017 Iflytek, Inc. All rights reserved.
- */
 package com.liaoyb.blog;
 
 import org.springframework.boot.SpringApplication;
