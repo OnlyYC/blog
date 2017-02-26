@@ -1,0 +1,47 @@
+#开发环境配置
+server:
+  port: 3000
+
+
+#datasource
+spring:
+  thymeleaf:
+    cache: false
+
+
+# mysql
+  datasource:
+    data: classpath:db/data.sql
+    name: jpa
+    url: jdbc:mysql://localhost:3306/blog_dev
+    username: root
+    password: root
+     # 使用数据源
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+# h2
+#  datasource:
+#    url: jdbc:h2:file:~/h2/blog;AUTO_SERVER=TRUE
+#  h2:
+#    console:
+#      enabled: true
+
+
+
+
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+    database: MYSQL
+
+
+
+#logging
+logging:
+  level:
+    root: debug

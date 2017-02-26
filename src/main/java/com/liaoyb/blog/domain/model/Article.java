@@ -1,35 +1,39 @@
-package com.liaoyb.blog.model;
+package com.liaoyb.blog.domain.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
- * <p>
- * <code>Article</code>
- * </p>
- *
- * @author ybliao2
- * @version 1.0
- * @since 1.0
+ * Article
  */
 @Entity
 public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
-	private String id;
+	private Long id;
 
 	private String title;
 
+	@Column(name = "`describe`")
 	private String describe;
 
-	//文章地址(markdown转换成的html)
-	private String link;
+	private String markdown;
+
+	private String html;
 	private String content;
 
 	@Column(name = "create_time")
@@ -37,11 +41,17 @@ public class Article implements Serializable {
 	@Column(name = "update_time")
 	private Date updateTime;
 
-	public String getId() {
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinTable(name = "article_tag",
+			joinColumns = { @JoinColumn(name = "article_id", referencedColumnName = "id") },
+			inverseJoinColumns = { @JoinColumn(name = "tag_id", referencedColumnName = "id") })
+	private List<Tag> tags=new ArrayList<>();
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -89,11 +99,27 @@ public class Article implements Serializable {
 		this.describe = describe;
 	}
 
-	public String getLink() {
-		return link;
+	public String getMarkdown() {
+		return markdown;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
+	public void setMarkdown(String markdown) {
+		this.markdown = markdown;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+
+	public void setHtml(String html) {
+		this.html = html;
+	}
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 }

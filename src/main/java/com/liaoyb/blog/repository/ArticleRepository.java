@@ -1,16 +1,10 @@
 package com.liaoyb.blog.repository;
 
-import com.liaoyb.blog.model.Article;
+import com.liaoyb.blog.domain.model.Article;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * <p>
- * <code>ArticleRepository</code>
- * </p>
- *
- * @author ybliao2
- * @version 1.0
- * @since 1.0
+ * ArticleRepository
  */
-public interface ArticleRepository extends JpaRepository<Article,String> {
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 }
