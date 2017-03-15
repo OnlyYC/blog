@@ -1,5 +1,6 @@
 package com.liaoyb.blog.service.impl;
 
+import com.liaoyb.blog.domain.dto.PageParam;
 import com.liaoyb.blog.domain.model.Article;
 import com.liaoyb.blog.repository.ArticleRepository;
 import com.liaoyb.blog.service.ArticleService;
@@ -19,9 +20,13 @@ public class ArticleServiceImpl implements ArticleService {
 	@Resource
 	private ArticleRepository articleRepository;
 	@Override
-	public Page<Article> findAll(int page, int size) {
-		PageRequest pageRequest=null;
-		Pageable pageable = new PageRequest(page, size, new Sort(Sort.Direction.DESC, "createTime"));
+	public Page<Article> getArticles(PageParam queryParam) {
+		Pageable pageable = queryParam.convertToPageRequest();
 		return articleRepository.findAll(pageable);
+	}
+
+	@Override
+	public Article getArticle(Long articleId) {
+		return articleRepository.findOne(articleId);
 	}
 }

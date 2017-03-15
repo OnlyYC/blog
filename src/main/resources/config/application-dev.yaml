@@ -12,7 +12,8 @@ spring:
 # mysql
   datasource:
     data: classpath:db/data.sql
-    name: jpa
+    initialize: false #是否初始化（执行data.sql）
+    name: blog_dev
     url: jdbc:mysql://localhost:3306/blog_dev
     username: root
     password: root

@@ -31,10 +31,13 @@ public class Article implements Serializable {
 	@Column(name = "`describe`")
 	private String describe;
 
-	private String markdown;
 
+	@Column(columnDefinition="text")
 	private String html;
+
+	@Column(columnDefinition="text")
 	private String content;
+	private String contentType;
 
 	@Column(name = "create_time")
 	private Date createTime;
@@ -97,14 +100,6 @@ public class Article implements Serializable {
 
 	public void setDescribe(String describe) {
 		this.describe = describe;
-	}
-
-	public String getMarkdown() {
-		return markdown;
-	}
-
-	public void setMarkdown(String markdown) {
-		this.markdown = markdown;
 	}
 
 	public String getHtml() {

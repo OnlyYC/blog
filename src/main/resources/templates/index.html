@@ -4,72 +4,111 @@
 <head>
     <meta charset="UTF-8"/>
     <title>LiaoYb Blog</title>
-    <link type="text/css" th:href="@{js/lib/bootstrap-3.3.7/css/bootstrap.min.css}" href="../static/js/lib/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet"/>
-    <link type="text/css" th:href="@{js/lib/font-awesome-4.7.0/css/font-awesome.min.css}" href="../static/js/lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet"/>
-    <link type="text/css" th:href="@{css/base.css}" href="../static/css/base.css" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/js/lib/bootstrap-3.3.7/css/bootstrap.min.css}" href="../static/js/lib/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/js/lib/font-awesome-4.7.0/css/font-awesome.min.css}" href="../static/js/lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/css/base.css}" href="../static/css/base.css" rel="stylesheet"/>
 </head>
 <body>
 
-	<div class="WideStyles-header NarrowStyles-header Styles-header">
-		<div class=" NarrowStyles-headerContent WideStyles-headerContent">
-			<h2 style="padding: 30px 30px;margin: 0px;">
-				<a class=" Styles-subtleLink NarrowStyles-flexFont" style="color: white;" th:href="@{/}" href="index.html">LiaoYb Blog</a>
-			</h2>
-			<div class=" Styles-headerLinkBox NarrowStyles-linkFlex" >
-				<div style="display: flex;flex-direction: row;">
-					<div class=" Styles-headerLink">
-						<a href="about.html" th:href="@{/about}" class=" Styles-subtleLink" style="color: white;">
-							<div>
-								<div><i class="fa fa-question-circle"></i></div>
-								About
-							</div>
-						</a>
-					</div>
-					<div class=" Styles-headerLink">
-						<a href="https://onlyyc.github.io/Resume/" class=" Styles-subtleLink" style="color: white;">
-							<div>
-								<div><i class="fa fa-file-text"></i></div>
-								Resume
-							</div>
-						</a>
-					</div>
-					<div class=" Styles-headerLink">
-						<a href="https://github.com/OnlyYC" class="Styles-subtleLink" style="color: white;">
-							<div>
-								<div><i class="fa fa-github"></i></div>
-								Github
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div th:replace="common/common::menu"></div>
+
+	<div id="counter2" class="WideStyles-content NarrowStyles-content" style="max-width: 1000px;">
+
+		<article-list-item v-for="article in result.articles" :article="article"></article-list-item>
+		<more-articles v-on:more="moreArticles" :visible="!result.curr.last"></more-articles>
+
 	</div>
 
-	<div class="WideStyles-content NarrowStyles-content" style="max-width: 1000px;">
-		<div th:each="article,articleState:${articlePage.content}">
+
+	<div class="WideStyles-footer Styles-footer">Last published 2017-02-18</div>
+
+	<th:block th:replace="common/value"></th:block>
+    <script type="text/javascript" th:src="@{/js/lib/jquery-1.12.4/jquery.min.js}" src="../static/js/lib/jquery-1.12.4/jquery.js" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/lib/bootstrap-3.3.7/js/bootstrap.min.js}" src="../static/js/lib/bootstrap-3.3.7/js/bootstrap.js" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/lib/vue/vue.js}" src="../static/js/lib/vue/vue.js" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/lib/vue/vue-resource.js}" src="../static/js/lib/vue/vue-resource.js" charset="utf-8"></script>
+
+	<script id="article-list-item-template" type="text/x-tpml">
+		<div>
 			<h1>
-				<a href="" class="Styles-subtleLink" style="color: rgb(34, 34, 34);" th:text="${article.title}">What's Functional Programming All About?</a>
+				<a :href="'/article/'+article.id" class="Styles-subtleLink" style="color: rgb(34, 34, 34);" > {{article.title}} </a>
 			</h1>
 			<div style="color: #999;margin-bottom: 20px;">
 				Posted
-				<a href="" th:text="${#dates.format(article.createTime, 'yyyy-MM-dd')}">2017-01-25</a>
+				<span>{{new Date(article.createTime).toLocaleString()}}</span>
 			</div>
-			<div th:text="${article.describe}">
-				<p>There are many descriptions floating around the internet, trying to explain functional programming in simple terms. Unfortunately, most discuss details only loosely related to functional programming, while others focus on topics that are completely irrelevant. So of course, I had to write my own!</p>
-				<p>This post is my own understanding of what is the "core" of "functional programming", how it differs from "imperative" programming, and what the main benefits of the approach are. As a worked example, we will use a kitchen recipe as a proxy for the more-abstract kind of logic you find in program source code, to try and make concrete what is normally a very abstract topic. That recipe is one of my favorite recipes available online</p>
+			<div>
+				{{article.describe}}
 			</div>
 
 			<a href="javascript:void(0);" >Comments</a>
 
 			<hr class="divide"/>
 		</div>
-	</div>
+	</script>
+	<script id="more-articles-template" type="text/x-tpml">
+		<div class="more" v-show="visible">
+			<i v-on:click="more" class="fa fa-angle-double-down fa-2x" title="more"></i>
+		</div>
+	</script>
+	<style>
+		.more{
+			text-align: center;
+		}
+		.more i{
+			cursor: pointer;
+		}
+		.more i:hover{
+			transition: all 0.3s ease;
+			padding: 5px;
+			font-size: 30px;
+		}
+	</style>
+	<script>
+		Vue.component('article-list-item',{
+			template:'#article-list-item-template',
+			props:['article']
+		})
+		Vue.component('more-articles',{
+			template:'#more-articles-template',
+			props:['visible'],
+			methods:{
+				more:function () {
+					this.$emit('more')
+					console.info("more")
+				}
+			}
+		})
 
 
-	<div class=" WideStyles-footer Styles-footer">Last published 2017-02-18</div>
 
-    <script type="text/javascript" th:src="@{js/lib/jquery-1.12.4/jquery.min.js}" src="../static/js/lib/jquery-1.12.4/jquery.js" charset="utf-8"></script>
-    <script type="text/javascript" th:src="@{js/lib/bootstrap-3.3.7/js/bootstrap.min.js}" src="../static/js/lib/bootstrap-3.3.7/js/bootstrap.js" charset="utf-8"></script>
+		new Vue({
+			el:'#counter2',
+			data:{
+				nextPage:0,
+				size:10,
+				apiUrl: config.servePath+'/api/articles',
+				result:{
+					curr: {last:true},
+					articles:[]
+				}
+			},
+			mounted: function () {
+				this.moreArticles()
+			},
+			methods:{
+				moreArticles:function () {
+					var self=this
+					self.$http.post(self.apiUrl,{pageDto:{page:self.nextPage,size:self.size}}).then(function (response) {
+						self.result.curr = response.body
+						self.nextPage=response.body.number+1
+						self.result.articles=Array.prototype.concat(self.result.articles,response.body.content)
+					},function (response) {
+						alert("error")
+					});
+				}
+			}
+		})
+	</script>
 </body>
 </html>

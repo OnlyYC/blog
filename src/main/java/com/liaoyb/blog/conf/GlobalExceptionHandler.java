@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,25 +35,30 @@ public class GlobalExceptionHandler extends BasicErrorController {
 		HttpStatus status = getStatus(request);
 		//404
 		if (HttpStatus.NOT_FOUND == status) {
-			return new ModelAndView("error/404", model);
+			return new ModelAndView("errorPage/404", model);
 		}
 		// 指定自定义的视图
-		return new ModelAndView("error/error", model);
+		return new ModelAndView("errorPage/error", model);
+	}
+
+	@RequestMapping(produces = "text/html", value = "/404")
+	public ModelAndView errorHtml404(HttpServletRequest request, HttpServletResponse response) {
+		response.setStatus(HttpStatus.NOT_FOUND.value());
+		return new ModelAndView("errorPage/404");
+	}
+
+	@RequestMapping("/404")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> error404(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("error", "not found");
+		return new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
 	}
 
 	@Autowired
 	public GlobalExceptionHandler(ServerProperties serverProperties) {
 		super(new DefaultErrorAttributes(), serverProperties.getError());
 	}
-
-//	@ExceptionHandler(value = Exception.class)
-//	@ResponseBody
-//	public ErrorInfo jsonErrorHandler(HttpServletRequest req,Exception e) throws Exception {
-//		logger.error("occur exception",e);
-//		ErrorInfo r = new ErrorInfo();
-//		r.setError(e.getMessage());
-//		return r;
-//	}
 
 
 	@Override
